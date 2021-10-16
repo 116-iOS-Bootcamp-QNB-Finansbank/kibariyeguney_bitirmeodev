@@ -61,9 +61,6 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
     
     
     @IBAction func orderTodoButtonTapped(_ sender: Any) {
-        for item in filteredTodoLists {
-            print(item.date)
-        }
         filteredTodoLists.sort(by: { $0.date < $1.date })
         
         self.tableView.reloadData()
