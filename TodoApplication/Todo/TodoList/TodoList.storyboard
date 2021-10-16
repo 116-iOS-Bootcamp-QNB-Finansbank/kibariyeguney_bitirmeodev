@@ -60,6 +60,12 @@
                                             <action selector="addTodoButtonTapped:" destination="Y6W-OH-hqX" id="nMz-0B-z5T"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GhA-dI-hH8"/>
+                                    <barButtonItem title="Order" width="42" id="0nG-hH-qDW">
+                                        <connections>
+                                            <action selector="orderTodoButtonTapped:" destination="Y6W-OH-hqX" id="1yG-zX-zJg"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -75,6 +81,7 @@
                     <connections>
                         <outlet property="AddTodoNameButton" destination="r0q-sG-KGT" id="7Ml-Yo-PDb"/>
                         <outlet property="addTodoNameButton" destination="r0q-sG-KGT" id="foI-cd-pyO"/>
+                        <outlet property="orderTodoButton" destination="0nG-hH-qDW" id="UQO-VD-jhg"/>
                         <outlet property="searchBar" destination="fnZ-xW-Gku" id="s7p-xk-oTF"/>
                         <outlet property="tableView" destination="7kC-Fj-gSU" id="tTr-lK-bMX"/>
                     </connections>
@@ -82,126 +89,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="20" y="80"/>
-        </scene>
-        <!--Todo Detail View Controller-->
-        <scene sceneID="Jv1-uY-nnl">
-            <objects>
-                <viewController storyboardIdentifier="TodoDetailViewController" id="rUd-c8-SBd" customClass="TodoDetailViewController" customModule="TodoApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleAspectFit" id="yGs-4N-AiQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vc-EK-162">
-                                <rect key="frame" x="28" y="45" width="385" height="264"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SWa-RF-WgY">
-                                        <rect key="frame" x="0.0" y="0.0" width="385" height="264"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Deneme" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RMt-vQ-TSn">
-                                                <rect key="frame" x="100" y="20" width="200" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="9ln-e2-WhI"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="İsim" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htx-9L-H9M">
-                                                <rect key="frame" x="20" y="20" width="60" height="20.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="BfT-iU-Wpp"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Detay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgb-Jl-bns">
-                                                <rect key="frame" x="20" y="74" width="60" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="I2g-bd-CSN"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Aciklama" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="89w-C4-5yC">
-                                                <rect key="frame" x="100" y="74" width="200" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="WTO-uZ-Krd"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tamamlanma Zamanı" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wv5-ML-vgS">
-                                                <rect key="frame" x="20" y="162" width="90" height="82"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TOa-xn-JGL">
-                                                <rect key="frame" x="100" y="162" width="265" height="82"/>
-                                            </datePicker>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="Wv5-ML-vgS" firstAttribute="top" secondItem="kgb-Jl-bns" secondAttribute="bottom" constant="20" id="9ES-OZ-GKN"/>
-                                            <constraint firstItem="RMt-vQ-TSn" firstAttribute="leading" secondItem="Htx-9L-H9M" secondAttribute="trailing" constant="20" id="9rv-Np-bhN"/>
-                                            <constraint firstItem="TOa-xn-JGL" firstAttribute="top" secondItem="89w-C4-5yC" secondAttribute="bottom" constant="30" id="HDf-Qa-rGK"/>
-                                            <constraint firstItem="89w-C4-5yC" firstAttribute="top" secondItem="RMt-vQ-TSn" secondAttribute="bottom" constant="20" id="L8o-KE-zv5"/>
-                                            <constraint firstItem="kgb-Jl-bns" firstAttribute="top" secondItem="RMt-vQ-TSn" secondAttribute="bottom" constant="20" id="Rhq-ZW-loU"/>
-                                            <constraint firstItem="RMt-vQ-TSn" firstAttribute="leading" secondItem="Htx-9L-H9M" secondAttribute="trailing" constant="20" id="Ub0-dS-wKy"/>
-                                            <constraint firstItem="89w-C4-5yC" firstAttribute="leading" secondItem="kgb-Jl-bns" secondAttribute="trailing" constant="20" id="aDb-kQ-VuF"/>
-                                            <constraint firstItem="kgb-Jl-bns" firstAttribute="top" secondItem="RMt-vQ-TSn" secondAttribute="bottom" constant="20" id="fDi-TG-jjS"/>
-                                            <constraint firstItem="89w-C4-5yC" firstAttribute="top" secondItem="RMt-vQ-TSn" secondAttribute="bottom" constant="20" id="yHX-kN-uQB"/>
-                                            <constraint firstItem="RMt-vQ-TSn" firstAttribute="leading" secondItem="Htx-9L-H9M" secondAttribute="trailing" constant="20" id="yXi-zQ-lXg"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="SWa-RF-WgY" firstAttribute="top" secondItem="FC2-vD-UPz" secondAttribute="top" constant="30" id="Wvb-cE-9bU"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="myY-4G-Qfe"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="FC2-vD-UPz"/>
-                                <connections>
-                                    <outlet property="delegate" destination="rUd-c8-SBd" id="K5x-V9-jjx"/>
-                                </connections>
-                            </scrollView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uiz-mk-epN">
-                                <rect key="frame" x="-1" y="852" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="add" id="YHQ-a4-hrY">
-                                        <connections>
-                                            <action selector="addButtonTapped:" destination="rUd-c8-SBd" id="uUF-My-dbK"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="KJy-Ly-m3t"/>
-                                    <barButtonItem systemItem="trash" id="gDl-Y7-ROf" userLabel="Delete Button">
-                                        <connections>
-                                            <action selector="deleteButtonTapped:" destination="rUd-c8-SBd" id="VaG-hR-BBZ"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="afK-MS-nCl"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <edgeInsets key="layoutMargins" top="0.0" left="20" bottom="0.0" right="20"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="GZK-3i-FGT"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="addButton" destination="YHQ-a4-hrY" id="XZu-A1-rb7"/>
-                        <outlet property="deleteButton" destination="gDl-Y7-ROf" id="Gsh-L1-VBS"/>
-                        <outlet property="todoDetail" destination="89w-C4-5yC" id="FMJ-iQ-N1K"/>
-                        <outlet property="todoEndTime" destination="TOa-xn-JGL" id="o2j-Q1-SJi"/>
-                        <outlet property="todoName" destination="RMt-vQ-TSn" id="I3M-tX-2wc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tAU-g8-psJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1613.0434782608697" y="59.598214285714285"/>
         </scene>
     </scenes>
     <resources>

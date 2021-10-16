@@ -13,12 +13,17 @@ class TodoDetailViewModel: TodoDetailViewModelProtocol {
     
     private var todo: TodoListEntity?
 
+    init() {
+        
+    }
     init(todo: TodoListEntity) {
         self.todo = todo
     }
     
     func viewDidLoad() {
-        delegate?.showTodoDetail(TodoDetailPresentation(todo: todo!))
+        if(todo != nil){
+            delegate?.showTodoDetail(TodoDetailPresentation(todo: todo!))
+        }
     }
     
     func saveTodo(todoDetailPresentation : TodoDetailPresentation) {
@@ -39,6 +44,10 @@ class TodoDetailViewModel: TodoDetailViewModelProtocol {
         appDelegate.saveContext()
     }
     
+    func isEmpty() -> Bool{
+        return todo == nil
+    }
+    
     func deleteTodo() {
          
         if todo == nil {
@@ -48,11 +57,8 @@ class TodoDetailViewModel: TodoDetailViewModelProtocol {
         let persistantContainer = appDelegate.persistentContainer
         let context = persistantContainer.viewContext
         
-        context.delete(todo!)
-
-        // To delete the entity from the persistent store, call
-        // save on the context
         do {
+            context.delete(todo!)
             try context.save()
         }
         catch {

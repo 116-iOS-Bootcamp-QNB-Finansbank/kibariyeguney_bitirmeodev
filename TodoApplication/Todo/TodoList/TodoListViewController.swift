@@ -7,21 +7,33 @@
 
 import UIKit
 
+let myNotificationKey = "todoListChanged"
+
 class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListViewProtocol{
         
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var orderTodoButton: UIBarButtonItem!
     @IBOutlet weak var addTodoNameButton: UIBarButtonItem!
     
     override func viewDidLoad() {
-            super.viewDidLoad()
+        super.viewDidLoad()
             
-            searchBar.delegate = self
+        searchBar.delegate = self
         
-            presenter.viewDidLoad()
+        presenter.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                                                    selector: #selector(doAfterNotified),
+                                                    name: NSNotification.Name(rawValue: myNotificationKey),
+                                                    object: nil)
     }
+
+    @objc func doAfterNotified() {
+        self.presenter.viewDidLoad()
+   }
         
     var presenter: TodoListPresenterProtocol!
     var todoLists: [TodoListPresentation] = []
@@ -45,22 +57,25 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
     @IBAction func addTodoButtonTapped(_ sender: Any) {
         presenter.addRow()
         presenter.viewDidLoad()
-        
-        /*let storyboard = UIStoryboard(name: "TodoList", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "TodoDetailViewController") as! TodoDetailViewController
-        vc.title = "New Todo"
-        vc.update = {
-            self.presenter.viewDidLoad()
+    }
+    
+    
+    @IBAction func orderTodoButtonTapped(_ sender: Any) {
+        for item in filteredTodoLists {
+            print(item.date)
         }
-        navigationController?.pushViewController(vc, animated: true)
-        print("Button tapped")*/
+        filteredTodoLists.sort(by: { $0.date < $1.date })
+        
+        self.tableView.reloadData()
     }
 }
 
     extension TodoListViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             presenter.didSelectRow(at: indexPath)
+            
         }
+        
     }
 
     extension TodoListViewController: UITableViewDataSource {
@@ -79,6 +94,7 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
             if (searchText == ""){
                 filteredTodoLists = todoLists
             } else {
+                
                 for todo in todoLists {
                     if (todo.title.lowercased().contains(searchText.lowercased())){
                         filteredTodoLists.append(todo)
@@ -87,5 +103,6 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
             }
             self.tableView.reloadData()
         }
+        
     }
 

@@ -15,4 +15,5 @@ protocol TodoDetailViewModelProtocol {
     func viewDidLoad()
     func saveTodo(todoDetailPresentation : TodoDetailPresentation)
     func deleteTodo()
+    func isEmpty() -> Bool
 }

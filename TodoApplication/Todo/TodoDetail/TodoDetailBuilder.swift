@@ -14,7 +14,7 @@ class TodoDetailBuilder {
     }
     static func buildEmpty() -> TodoDetailViewController {
         let viewController = TodoDetailViewController()
-        //viewController.viewModel = TodoDetailViewModel()
+        viewController.viewModel = TodoDetailViewModel()
         return viewController
     }
 }

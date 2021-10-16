@@ -18,8 +18,9 @@ class TodoDetailViewController: UIViewController ,UITextFieldDelegate {
     
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
+    let myNotificationKey = "todoListChanged"
+
     var todo : TodoListEntity?
-    var update : (()->Void)?
     
     var viewModel: TodoDetailViewModelProtocol! {
         didSet {
@@ -30,16 +31,25 @@ class TodoDetailViewController: UIViewController ,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (viewModel != nil){
-            viewModel.viewDidLoad()
-        }
+        viewModel.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(doThisWhenNotify),
+                                                   name: NSNotification.Name(rawValue: myNotificationKey),
+                                                   object: nil)
+    }
+
+    @objc func doThisWhenNotify() {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        viewModel.deleteTodo()
-        update?()
-        
-        navigationController?.popViewController(animated: true)
+        if (!viewModel.isEmpty()){
+            viewModel.deleteTodo()
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: myNotificationKey), object: self)
+
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -47,9 +57,10 @@ class TodoDetailViewController: UIViewController ,UITextFieldDelegate {
         guard let todoDetailText = todoDetail.text, !todoDetailText.isEmpty else { return }
         
         var todoDetailPresentation = TodoDetailPresentation(name: todoNameText, detail: todoDetailText, finishTime: todoEndTime.date)
+        
         viewModel.saveTodo(todoDetailPresentation: todoDetailPresentation)
             
-        update?()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: myNotificationKey), object: self)
         
         navigationController?.popViewController(animated: true)
     }

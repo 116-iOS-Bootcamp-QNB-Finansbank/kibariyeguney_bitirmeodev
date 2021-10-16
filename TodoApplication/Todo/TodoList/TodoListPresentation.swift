@@ -9,12 +9,14 @@ import Foundation
 
 struct TodoListPresentation {
     let title: String
+    let date:Date
     
-    init(title: String) {
+    init(title: String, date : Date) {
         self.title = title
+        self.date = date
     }
     
     init(todo: TodoListEntity) {
-        self.init(title: todo.name!)
+        self.init(title: todo.name!, date: todo.finishTime!)
     }
 }
