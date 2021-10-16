@@ -21,21 +21,17 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
             searchBar.delegate = self
         
             presenter.viewDidLoad()
-        /*if (!UserDefaults().bool(forKey: "setup")){
-            UserDefaults().set(true, forKey: "setup")
-            UserDefaults().set(0, forKey: "count")
-        }*/
     }
         
     var presenter: TodoListPresenterProtocol!
-    var movies: [TodoListPresentation] = []
-    var filteredMovies: [TodoListPresentation] = []
+    var todoLists: [TodoListPresentation] = []
+    var filteredTodoLists: [TodoListPresentation] = []
 
     func handleOutput(_ output: TodoListPresenterOutput) {
         switch output {
-        case .showTodoList(let movies):
-            self.movies = movies
-            filteredMovies = movies
+        case .showTodoList(let todoLists):
+            self.todoLists = todoLists
+            filteredTodoLists = todoLists
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -47,14 +43,17 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
     }
     
     @IBAction func addTodoButtonTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TodoList", bundle: nil)
+        presenter.addRow()
+        presenter.viewDidLoad()
+        
+        /*let storyboard = UIStoryboard(name: "TodoList", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "TodoDetailViewController") as! TodoDetailViewController
         vc.title = "New Todo"
         vc.update = {
             self.presenter.viewDidLoad()
         }
         navigationController?.pushViewController(vc, animated: true)
-        print("Button tapped")
+        print("Button tapped")*/
     }
 }
 
@@ -66,23 +65,23 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
 
     extension TodoListViewController: UITableViewDataSource {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return filteredMovies.count
+            return filteredTodoLists.count
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath)
-            cell.textLabel?.text = filteredMovies[indexPath.row].title
+            cell.textLabel?.text = filteredTodoLists[indexPath.row].title
             return cell
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            filteredMovies = []
+            filteredTodoLists = []
             if (searchText == ""){
-                filteredMovies = movies
+                filteredTodoLists = todoLists
             } else {
-                for movie in movies {
-                    if (movie.title.lowercased().contains(searchText.lowercased())){
-                        filteredMovies.append(movie)
+                for todo in todoLists {
+                    if (todo.title.lowercased().contains(searchText.lowercased())){
+                        filteredTodoLists.append(todo)
                     }
                 }
             }

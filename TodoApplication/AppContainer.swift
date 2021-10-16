@@ -10,6 +10,6 @@ import Foundation
 let appContainer = AppContainer()
 
 class AppContainer {
-    let service = ClientNetworkService()
+    let service = TodoListService()
     let router = AppRouter()
 }

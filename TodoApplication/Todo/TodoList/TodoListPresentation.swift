@@ -15,6 +15,6 @@ struct TodoListPresentation {
     }
     
     init(todo: TodoListEntity) {
-        self.init(title: todo.name ?? "")
+        self.init(title: todo.name!)
     }
 }

@@ -10,7 +10,11 @@ import Foundation
 class TodoListPresenter: NSObject, TodoListPresenterProtocol {
     private unowned let view: TodoListViewProtocol
     private let router: TodoListRouterProtocol
-    private var interactor: TodoListInteractorProtocol
+    private var interactor: TodoListInteractorProtocol {
+        didSet {
+            self.interactor.delegate = self
+        }
+    }
     
     init(interactor: TodoListInteractorProtocol,
          view: TodoListViewProtocol,
@@ -27,6 +31,9 @@ class TodoListPresenter: NSObject, TodoListPresenterProtocol {
     func didSelectRow(at indexPath: IndexPath) {
         interactor.didSelectRow(at: indexPath)
     }
+    func addRow() {
+        interactor.addRow()
+    }
 }
 
 extension TodoListPresenter: TodoListInteractorDelegate {
@@ -36,6 +43,8 @@ extension TodoListPresenter: TodoListInteractorDelegate {
             view.handleOutput(.showTodoList(todoList.map(TodoListPresentation.init)))
         case .showTodoDetail(let todo):
             router.navigate(to: .showTodoDetail(todo))
+        case .showTodoDetailEmpty:
+            router.navigate(to: .showTodoDetailEmpty)
         }
     }
 }
