@@ -10,6 +10,8 @@ import Foundation
 class TodoListPresenter: NSObject, TodoListPresenterProtocol {
     private unowned let view: TodoListViewProtocol
     private let router: TodoListRouterProtocol
+    var update : (()->Void)?
+    
     private var interactor: TodoListInteractorProtocol {
         didSet {
             self.interactor.delegate = self
@@ -40,7 +42,16 @@ extension TodoListPresenter: TodoListInteractorDelegate {
     func handleOutput(_ output: TodoListInteractorOutput) {
         switch output {
         case .showTodoList(let todoList):
-            view.handleOutput(.showTodoList(todoList.map(TodoListPresentation.init)))
+            var presenterList: [TodoListPresentation] = []
+            var i : Int = 0
+            
+            for todo in todoList {
+                let p : TodoListPresentation = TodoListPresentation(todo: todo , index: i)
+                
+                presenterList.append(p)
+                i = i+1
+            }
+            view.handleOutput(.showTodoList(presenterList))
         case .showTodoDetail(let todo):
             router.navigate(to: .showTodoDetail(todo))
         case .showTodoDetailEmpty:

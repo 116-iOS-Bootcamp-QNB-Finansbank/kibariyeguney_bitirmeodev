@@ -72,7 +72,8 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
 
     extension TodoListViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            presenter.didSelectRow(at: indexPath)
+            let indexPath2 : IndexPath = IndexPath(row: filteredTodoLists[indexPath.row].index, section: 0)
+            presenter.didSelectRow(at: indexPath2)
             
         }
         
@@ -94,7 +95,6 @@ class TodoListViewController: UIViewController, UISearchBarDelegate, TodoListVie
             if (searchText == ""){
                 filteredTodoLists = todoLists
             } else {
-                
                 for todo in todoLists {
                     if (todo.title.lowercased().contains(searchText.lowercased())){
                         filteredTodoLists.append(todo)
