@@ -10,6 +10,6 @@ import Foundation
 let appContainer = AppContainer()
 
 class AppContainer {
-    let service = TodoListService()
+    let service = CoreDataService()
     let router = AppRouter()
 }

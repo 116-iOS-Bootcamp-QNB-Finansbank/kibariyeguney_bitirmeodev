@@ -10,10 +10,10 @@ import Foundation
 
 class TodoListInteractor: NSObject, TodoListInteractorProtocol {
     weak var delegate: TodoListInteractorDelegate?
-    private let service: TodoListService
+    private let service: CoreDataService
     private var todoLists: [TodoListEntity] = []
     
-    init(service: TodoListService) {
+    init(service: CoreDataService) {
         self.service = service
     }
     

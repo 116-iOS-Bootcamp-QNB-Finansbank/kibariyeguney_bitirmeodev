@@ -27,7 +27,6 @@
 		289C9F422718C5FF00A8512E /* TodoDetailPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289C9F412718C5FF00A8512E /* TodoDetailPresentation.swift */; };
 		289C9F442718C73800A8512E /* TodoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289C9F432718C73800A8512E /* TodoDetailViewModel.swift */; };
 		289C9F472718DA5800A8512E /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289C9F462718DA5800A8512E /* CoreDataService.swift */; };
-		289C9F49271A1AAE00A8512E /* TodoListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289C9F48271A1AAE00A8512E /* TodoListService.swift */; };
 		289C9F4C271A2F1A00A8512E /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289C9F4A271A2F1A00A8512E /* TodoDetailViewController.swift */; };
 		289C9F4D271A2F1A00A8512E /* TodoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289C9F4B271A2F1A00A8512E /* TodoDetailViewController.xib */; };
 /* End PBXBuildFile section */
@@ -55,7 +54,6 @@
 		289C9F412718C5FF00A8512E /* TodoDetailPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailPresentation.swift; sourceTree = "<group>"; };
 		289C9F432718C73800A8512E /* TodoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewModel.swift; sourceTree = "<group>"; };
 		289C9F462718DA5800A8512E /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		289C9F48271A1AAE00A8512E /* TodoListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListService.swift; sourceTree = "<group>"; };
 		289C9F4A271A2F1A00A8512E /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		289C9F4B271A2F1A00A8512E /* TodoDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				289C9F462718DA5800A8512E /* CoreDataService.swift */,
-				289C9F48271A1AAE00A8512E /* TodoListService.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -232,7 +229,6 @@
 				2864FC8B270F7C5A00CE2B1A /* AppDelegate.swift in Sources */,
 				2864FCD3270F885600CE2B1A /* TodoListPresenter.swift in Sources */,
 				289C9F402718C3B200A8512E /* TodoDetailContracts.swift in Sources */,
-				289C9F49271A1AAE00A8512E /* TodoListService.swift in Sources */,
 				2864FCD5270F891C00CE2B1A /* TodoListRouter.swift in Sources */,
 				2864FCC0270F7DB100CE2B1A /* AppContainer.swift in Sources */,
 				289C9F472718DA5800A8512E /* CoreDataService.swift in Sources */,

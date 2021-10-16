@@ -27,21 +27,12 @@ class TodoDetailViewModel: TodoDetailViewModelProtocol {
     }
     
     func saveTodo(todoDetailPresentation : TodoDetailPresentation) {
-         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let persistantContainer = appDelegate.persistentContainer
-        let context = persistantContainer.viewContext
         
         if todo == nil {
-            todo = TodoListEntity(context: context)
-            todo!.uuid = UUID()
+            CoreDataService.instance.addTodo(todoDetailPresentation:todoDetailPresentation)
+        } else {
+            CoreDataService.instance.updateTodo(todoDetailPresentation:todoDetailPresentation, todo:todo!)
         }
-        
-        todo!.name = todoDetailPresentation.name
-        todo!.detail = todoDetailPresentation.detail
-        todo!.finishTime = todoDetailPresentation.finishTime
-         
-        appDelegate.saveContext()
     }
     
     func isEmpty() -> Bool{
@@ -53,16 +44,6 @@ class TodoDetailViewModel: TodoDetailViewModelProtocol {
         if todo == nil {
             return
         }
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let persistantContainer = appDelegate.persistentContainer
-        let context = persistantContainer.viewContext
-        
-        do {
-            context.delete(todo!)
-            try context.save()
-        }
-        catch {
-            // Handle Error
-        }
+        CoreDataService.instance.deleteTodo(todo: todo!)
     }
 }
