@@ -16,4 +16,5 @@ protocol TodoDetailViewModelProtocol {
     func saveTodo(todoDetailPresentation : TodoDetailPresentation)
     func deleteTodo()
     func isEmpty() -> Bool
+    func fieldChanged (todoName:String, todoDetail:String, todoEndTime:Date)->Bool
 }

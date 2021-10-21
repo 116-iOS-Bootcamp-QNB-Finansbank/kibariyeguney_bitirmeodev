@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 
 class TodoDetailViewModel: TodoDetailViewModelProtocol {
+    
     weak var delegate: TodoDetailViewModelDelegate?
     
     private var todo: TodoListEntity?
@@ -33,6 +34,20 @@ class TodoDetailViewModel: TodoDetailViewModelProtocol {
         } else {
             CoreDataService.instance.updateTodo(todoDetailPresentation:todoDetailPresentation, todo:todo!)
         }
+    }
+    
+    
+    func fieldChanged (todoName:String, todoDetail:String, todoEndTime:Date)->Bool{
+        if (todoName != todo?.name){
+            return true;
+        }
+        if (todoDetail != todo?.detail){
+            return true;
+        }
+        if (todoEndTime != todo?.finishTime){
+            return true;
+        }
+        return false
     }
     
     func isEmpty() -> Bool{

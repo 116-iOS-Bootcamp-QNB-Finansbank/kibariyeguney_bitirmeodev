@@ -7,11 +7,12 @@
 
 import UIKit
 
-class TodoDetailViewController: UIViewController ,UITextFieldDelegate {
+class TodoDetailViewController: UIViewController , UITextViewDelegate  {
 
     @IBOutlet weak var todoName: UITextField!
-    @IBOutlet weak var todoDetail: UITextField!
-
+    
+    @IBOutlet weak var todoDetail: UITextView!
+    
     @IBOutlet weak var todoEndTime: UIDatePicker!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -37,11 +38,15 @@ class TodoDetailViewController: UIViewController ,UITextFieldDelegate {
                                                    selector: #selector(doThisWhenNotify),
                                                    name: NSNotification.Name(rawValue: myNotificationKey),
                                                    object: nil)
+        
+        todoDetail.delegate = self
+
     }
 
     @objc func doThisWhenNotify() {
     }
     
+
     @IBAction func deleteButtonTapped(_ sender: Any) {
         if (!viewModel.isEmpty()){
             viewModel.deleteTodo()
@@ -64,6 +69,20 @@ class TodoDetailViewController: UIViewController ,UITextFieldDelegate {
         
         navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func todoNameDidChanged(_ sender: Any) {
+        
+        saveButton.isEnabled = viewModel.fieldChanged(todoName : todoName.text!, todoDetail : todoDetail.text, todoEndTime : todoEndTime.date)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        saveButton.isEnabled = viewModel.fieldChanged(todoName : todoName.text!, todoDetail : todoDetail.text, todoEndTime : todoEndTime.date)
+    }
+    
+    
+    @IBAction func todoFinishDateDidChanged(_ sender: Any) {
+        saveButton.isEnabled = viewModel.fieldChanged(todoName : todoName.text!, todoDetail : todoDetail.text, todoEndTime : todoEndTime.date)
+    }
 }
 
 extension TodoDetailViewController: TodoDetailViewModelDelegate {
@@ -72,5 +91,8 @@ extension TodoDetailViewController: TodoDetailViewModelDelegate {
         todoName.text = todo.name
         todoDetail.text = todo.detail
         todoEndTime.date = todo.finishTime
+        
+        deleteButton.isEnabled = true
     }
 }
+
