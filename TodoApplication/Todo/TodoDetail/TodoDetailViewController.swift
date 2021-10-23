@@ -20,8 +20,6 @@ class TodoDetailViewController: UIViewController , UITextViewDelegate  {
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     let myNotificationKey = "todoListChanged"
-
-    var todo : TodoListEntity?
     
     var viewModel: TodoDetailViewModelProtocol! {
         didSet {
